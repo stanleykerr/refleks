@@ -1,4 +1,6 @@
 import {
+  ArcElement,
+  BarElement,
   CategoryScale,
   Chart as ChartJS,
   Filler,
@@ -15,10 +17,24 @@ import React, { useMemo, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import { useChartTheme } from '../../hooks/useChartTheme'
 import { Dropdown } from './Dropdown'
+import { SegmentedControl } from './SegmentedControl'
 import { Toggle } from './Toggle'
 
 // Register common chart.js components once
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, RadialLinearScale, Title, Tooltip, Legend, Filler)
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  RadialLinearScale,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+  // Added for bar & doughnut charts used in benchmark stats
+  BarElement,
+  ArcElement,
+)
 
 type DropdownOption = { label: string; value: string }
 
@@ -33,6 +49,12 @@ export type ChartBoxControls = {
     label?: string
     checked: boolean
     onChange: (checked: boolean) => void
+  }
+  segment?: {
+    label?: string
+    value: string
+    options: DropdownOption[]
+    onChange: (value: string) => void
   }
 }
 
@@ -65,6 +87,17 @@ export function ChartBox({
               onChange={(v) => controls.dropdown!.onChange(v)}
               options={controls.dropdown.options}
             />
+          )}
+          {controls?.segment && (
+            <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+              {controls.segment.label && <span>{controls.segment.label}</span>}
+              <SegmentedControl
+                size="sm"
+                options={controls.segment.options}
+                value={controls.segment.value}
+                onChange={(v) => controls.segment!.onChange(v)}
+              />
+            </div>
           )}
           {controls?.toggle && (
             <Toggle

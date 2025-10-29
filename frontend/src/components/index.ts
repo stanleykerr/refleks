@@ -11,6 +11,7 @@ export { TTKMovingAverageDetails } from './scenarios/TTKMovingAverageDetails';
 export { Findings } from './sessions/Findings';
 export { MetricsControls } from './sessions/MetricsControls';
 export { MetricsLineChart } from './sessions/MetricsLineChart';
+export { NextHighscoreForecast } from './sessions/NextHighscoreForecast';
 export { ScenarioMixRadarChart } from './sessions/ScenarioMixRadarChart';
 export { SessionLengthInsights } from './sessions/SessionLengthInsights';
 export { SummaryStats } from './sessions/SummaryStats';

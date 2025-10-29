@@ -63,6 +63,26 @@ export function cellFill(index: number, scenarioRank: number, score: number, thr
   return Math.max(0, Math.min(1, frac))
 }
 
+// Overall normalized progress across ranks [0..1]
+// Uses achieved rank and proximity to next threshold when available.
+export function normalizedRankProgress(scenarioRank: number, score: number, thresholds: number[]): number {
+  const n = thresholds?.length ?? 0
+  if (n === 0) return 0
+  const r = Math.max(0, Math.min(n, Number(scenarioRank || 0)))
+  if (r <= 0) {
+    const t0 = thresholds[0] ?? 0
+    if (t0 <= 0) return 0
+    const frac = Math.max(0, Math.min(1, Number(score || 0) / t0))
+    return frac * (1 / n)
+  }
+  if (r >= n) return 1
+  const prev = thresholds[r - 1] ?? 0
+  const next = thresholds[r] ?? prev
+  if (next <= prev) return r / n
+  const frac = Math.max(0, Math.min(1, (Number(score || 0) - prev) / (next - prev)))
+  return (r - 1) / n + frac * (1 / n)
+}
+
 // Grid columns for BenchmarkProgress rows:
 // Scenario | Recom | Play | Score | Rank1..N
 export const gridCols = (count: number) => `minmax(220px,1fr) 80px 40px 90px ${Array.from({ length: count }).map(() => '120px').join(' ')}`
