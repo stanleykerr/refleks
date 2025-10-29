@@ -23,7 +23,9 @@ type WatcherConfig struct {
 
 // Settings represents persisted application settings.
 type Settings struct {
-	SteamInstallDir      string   `json:"steamInstallDir"`
+	SteamInstallDir string `json:"steamInstallDir"`
+	// SteamIDOverride, if set, forces the SteamID used for Kovaak's API calls instead of parsing loginusers.vdf.
+	SteamIDOverride      string   `json:"steamIdOverride,omitempty"`
 	StatsDir             string   `json:"statsDir"`
 	TracesDir            string   `json:"tracesDir"`
 	SessionGapMinutes    int      `json:"sessionGapMinutes"`

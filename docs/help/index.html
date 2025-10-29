@@ -227,6 +227,33 @@
             </ul>
           </div>
         </details>
+
+        <details>
+          <summary>“steam ID not found” error on Benchmarks</summary>
+          <div class="details-body">
+            <p>RefleK's uses your Steam account to fetch official benchmark progress. On Windows, it detects your
+              SteamID from Steam's <code class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">loginusers.vdf</code>.
+              If detection fails, you'll see <code class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">steam ID not
+                found</code> when opening a benchmark.</p>
+            <p class="mt-3">Fix it with one of the options below:</p>
+            <ol class="list-decimal list-inside space-y-2 ml-2 mt-3">
+              <li><strong>Make sure Steam is running and you're logged in</strong>, then restart RefleK's.</li>
+              <li><strong>Set the correct Steam install directory</strong> in <code
+                  class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">Settings → Advanced → Steam install
+                  directory</code> (e.g.
+                <code class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">C:\Program Files (x86)\Steam</code>).
+              </li>
+              <li><strong>Or manually set your SteamID</strong> via <code
+                  class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">Settings → Advanced → SteamID override</code>.
+                Paste your SteamID (looks like <code
+                  class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">84609298453789401</code>).
+              </li>
+              <li class="text-[var(--text-muted)]"><strong>Advanced:</strong> You can also set the environment
+                variable <code class="px-2 py-1 bg-[var(--bg-card)] rounded text-sm">REFLEKS_STEAM_ID</code> before
+                launching the app.</li>
+            </ol>
+          </div>
+        </details>
       </div>
     </div>
   </section>

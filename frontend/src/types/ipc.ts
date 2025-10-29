@@ -27,6 +27,7 @@ import type { Theme } from '../lib/theme'
 
 export interface Settings {
   steamInstallDir?: string
+  steamIdOverride?: string
   statsDir: string
   tracesDir: string
   sessionGapMinutes: number

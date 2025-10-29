@@ -8,6 +8,7 @@ import type { Settings } from '../../types/ipc'
 export function SettingsPage() {
   const setSessionGap = useStore(s => s.setSessionGap)
   const [steamDir, setSteamDir] = useState('')
+  const [steamIdOverride, setSteamIdOverride] = useState('')
   const [statsPath, setStatsPath] = useState('')
   const [tracesPath, setTracesPath] = useState('')
   const [gap, setGap] = useState(30)
@@ -23,6 +24,7 @@ export function SettingsPage() {
       .then((s: Settings) => {
         if (!s) return
         setSteamDir((s as any).steamInstallDir || '')
+        setSteamIdOverride((s as any).steamIdOverride || '')
         setStatsPath(s.statsDir || '')
         setTracesPath((s as any).tracesDir || '')
         setGap(s.sessionGapMinutes)
@@ -36,7 +38,7 @@ export function SettingsPage() {
   }, [])
 
   const save = async () => {
-    const payload: Settings = { steamInstallDir: steamDir, statsDir: statsPath, tracesDir: tracesPath, sessionGapMinutes: gap, theme, mouseTrackingEnabled: mouseEnabled, mouseBufferMinutes: mouseBuffer, maxExistingOnStart: maxExisting }
+    const payload: Settings = { steamInstallDir: steamDir, steamIdOverride, statsDir: statsPath, tracesDir: tracesPath, sessionGapMinutes: gap, theme, mouseTrackingEnabled: mouseEnabled, mouseBufferMinutes: mouseBuffer, maxExistingOnStart: maxExisting }
     try {
       await updateSettings(payload)
       setTheme(theme)
@@ -50,6 +52,7 @@ export function SettingsPage() {
       await resetSettings()
       const s = await getSettings()
       setSteamDir((s as any).steamInstallDir || '')
+      setSteamIdOverride((s as any).steamIdOverride || '')
       setStatsPath(s.statsDir || '')
       setTracesPath((s as any).tracesDir || '')
       setGap(s.sessionGapMinutes)
@@ -116,6 +119,14 @@ export function SettingsPage() {
                 <input
                   value={steamDir}
                   onChange={e => setSteamDir(e.target.value)}
+                  className="w-full px-2 py-1 rounded bg-[var(--bg-tertiary)] border border-[var(--border-primary)]"
+                />
+              </Field>
+              <Field label="SteamID override (optional)">
+                <input
+                  value={steamIdOverride}
+                  onChange={e => setSteamIdOverride(e.target.value)}
+                  placeholder="7656119..."
                   className="w-full px-2 py-1 rounded bg-[var(--bg-tertiary)] border border-[var(--border-primary)]"
                 />
               </Field>

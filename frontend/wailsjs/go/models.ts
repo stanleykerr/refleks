@@ -136,6 +136,7 @@ export namespace models {
 	}
 	export class Settings {
 	    steamInstallDir: string;
+	    steamIdOverride?: string;
 	    statsDir: string;
 	    tracesDir: string;
 	    sessionGapMinutes: number;
@@ -152,6 +153,7 @@ export namespace models {
 	    constructor(source: any = {}) {
 	        if ('string' === typeof source) source = JSON.parse(source);
 	        this.steamInstallDir = source["steamInstallDir"];
+	        this.steamIdOverride = source["steamIdOverride"];
 	        this.statsDir = source["statsDir"];
 	        this.tracesDir = source["tracesDir"];
 	        this.sessionGapMinutes = source["sessionGapMinutes"];
