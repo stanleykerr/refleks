@@ -16,7 +16,7 @@ export function NextHighscoreForecast({ items, scenarioName }: { items: Scenario
 
   return (
     <InfoBox
-      title="Next high score forecast"
+      title="Next high score forecast (preview)"
       info={<div>
         <div className="mb-2">Estimates when you are likely to beat your current personal best for the selected scenario.
           The model focuses on runs, not hours, and computes an optimal pause between runs for fastest progress.
@@ -27,7 +27,7 @@ export function NextHighscoreForecast({ items, scenarioName }: { items: Scenario
           <li>Confidence reflects fit quality (R²), sample size, and recency.</li>
         </ul>
       </div>}
-      height={120}
+      height={114}
     >
       <div className="w-full flex flex-col md:flex-row md:items-center justify-between gap-3">
         {/* Left: ETA + inline badge */}
